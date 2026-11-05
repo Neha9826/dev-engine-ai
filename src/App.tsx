@@ -129,7 +129,7 @@ function Intelligence({ theme }: { theme: Theme }) {
     const playback = video.play()
     playback?.catch(() => setVideoFailed(true))
     return () => video.pause()
-  }, [artworkInView, prefersReducedMotion, videoFailed])
+  }, [theme, artworkInView, prefersReducedMotion, videoFailed])
 
   return <section className={theme === 'light' ? 'section intelligence-section intelligence-section-light' : 'section intelligence-section'}><div className="container intelligence-layout">
     {theme === 'light' ? (
@@ -152,6 +152,7 @@ function Intelligence({ theme }: { theme: Theme }) {
           <video
             ref={videoRef}
             className="intelligence-artwork-video"
+            key="light-intelligence-video"
             muted
             loop
             playsInline
@@ -171,6 +172,7 @@ function Intelligence({ theme }: { theme: Theme }) {
         <motion.div
           ref={artworkRef}
           className="intelligence-artwork intelligence-artwork-dark"
+          key="dark-intelligence-artwork"
           initial={{ opacity: 0, y: 18, scale: 0.985 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -179,6 +181,7 @@ function Intelligence({ theme }: { theme: Theme }) {
           <video
             ref={videoRef}
             className="intelligence-artwork-video intelligence-artwork-video-dark"
+            key="dark-intelligence-video"
             muted
             loop
             playsInline
