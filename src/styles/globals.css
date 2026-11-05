@@ -62,7 +62,7 @@
 .hero-video-fallback,.hero-background-video{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hero-video-fallback{z-index:0;background-color:var(--bg-soft);background-position:center;background-repeat:no-repeat;background-size:cover}
 :root[data-theme=dark] .hero-video-fallback{background:radial-gradient(ellipse at 52% 48%,#a259ff35 0%,#ec70cf16 40%,transparent 72%),linear-gradient(135deg,#140d1e,#0c0812)}
-.hero-background-video{z-index:1;object-fit:cover;object-position:center;background:transparent;opacity:0;transform:scale(.92);transition:opacity .35s ease,transform .35s ease}
+.hero-background-video{z-index:1;object-fit:cover;object-position:center;background:transparent;opacity:0;transform:scale(1);transition:opacity .35s ease}
 .hero-background-video.is-ready{opacity:1}
 /* Keep the approved background video at its original, unobscured quality. */
 .hero-video-stage:after{content:none}
