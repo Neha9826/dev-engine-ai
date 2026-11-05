@@ -164,7 +164,6 @@ function Intelligence({ theme }: { theme: Theme }) {
             className="intelligence-artwork-video"
             key="light-intelligence-video"
             autoPlay
-            autoPlay
             muted
             loop
             playsInline
