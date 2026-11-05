@@ -8,7 +8,12 @@ const videoSources: Record<Theme, string> = {
   dark: '/videos/Dev-Engine-AI-Hero-bg-dark-video.mp4',
 }
 
-const posterSources: Record<Theme, string> = {\n  light: '/videos/Dev-Engine-AI-Hero-bg-video-poster.jpg',\n  dark: '/videos/Dev-Engine-AI-Hero-bg-dark-video-poster.jpg',\n}\n\nexport default function HeroVisual({ theme }: HeroVisualProps) {
+const posterSources: Record<Theme, string> = {
+  light: '/videos/Dev-Engine-AI-Hero-bg-video-poster.jpg',
+  dark: '/videos/Dev-Engine-AI-Hero-bg-dark-video-poster.jpg',
+}
+
+export default function HeroVisual({ theme }: HeroVisualProps) {
   const [reducedMotion, setReducedMotion] = useState(
     () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
