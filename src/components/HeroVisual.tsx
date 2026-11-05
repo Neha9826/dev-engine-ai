@@ -50,6 +50,7 @@ export default function HeroVisual({ theme }: HeroVisualProps) {
           playsInline
           loop
           preload="auto"
+          onLoadedMetadata={(event) => { event.currentTarget.playbackRate = 0.85 }}
           aria-hidden="true"
           disablePictureInPicture
           controls={false}
