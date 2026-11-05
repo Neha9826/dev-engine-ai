@@ -114,31 +114,60 @@ function Lifecycle() {
 
 function Intelligence({ theme }: { theme: Theme }) {
   const artworkRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const artworkInView = useInView(artworkRef, { amount: 0.2 })
   const prefersReducedMotion = useReducedMotion()
+  const [videoFailed, setVideoFailed] = useState(false)
 
-  return <section className="section intelligence-section"><div className="container intelligence-layout">
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    if (prefersReducedMotion || !artworkInView || videoFailed) {
+      video.pause()
+      return
+    }
+    const playback = video.play()
+    playback?.catch(() => setVideoFailed(true))
+    return () => video.pause()
+  }, [artworkInView, prefersReducedMotion, videoFailed])
+
+  return <section className={theme === 'light' ? 'section intelligence-section intelligence-section-light' : 'section intelligence-section'}><div className="container intelligence-layout">
     {theme === 'light' ? (
       <motion.div
         ref={artworkRef}
-        className={`intelligence-artwork${artworkInView ? ' is-visible' : ''}`}
+        className="intelligence-artwork"
         initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
         whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <span className="intelligence-artwork-aura" aria-hidden="true" />
-        <img
-          src="/images/Information-to-Intelligent-Outcomes.png"
-          alt="From information to intelligent outcomes"
-          loading="lazy"
-          decoding="async"
-        />
+        {prefersReducedMotion || videoFailed ? (
+          <img
+            src="/images/Information-to-Intelligent-Outcomes.png"
+            alt="From information to intelligent outcomes"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <video
+            ref={videoRef}
+            className="intelligence-artwork-video"
+            muted
+            loop
+            playsInline
+            preload={artworkInView ? 'auto' : 'none'}
+            poster="/images/Information-to-Intelligent-Outcomes.png"
+            aria-label="Animated information-to-intelligence artwork"
+            onError={() => setVideoFailed(true)}
+          >
+            <source src="/videos/information-to-intelligent-outcomes.mp4" type="video/mp4" />
+          </video>
+        )}
       </motion.div>
     ) : (
       <div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div>
     )}
-    <div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div><h2>AI that earns its place in the <em>product.</em></h2><p>We connect language models, retrieval, structured data and intelligent workflows to solve specific problems—not to add AI for the headline.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & document intelligence</span><span>AI agents & workflows</span><span>Vector search & data pipelines</span></div><a className="text-link" href="#contact">Explore an AI use case <ArrowUpRight size={16} /></a></div>
+    <div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div><h2>From information to <em>intelligence.</em></h2><p>We connect your data, systems, and workflows to intelligent experiences that solve real business problems.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & knowledge systems</span><span>AI agents & automation</span><span>Intelligent data pipelines</span></div><a className="text-link" href="#contact">Explore AI capabilities <ArrowUpRight size={16} /></a></div>
   </div></section>
 }
 
