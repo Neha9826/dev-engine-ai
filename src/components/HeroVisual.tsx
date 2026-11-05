@@ -17,8 +17,10 @@ export default function HeroVisual({ theme }: HeroVisualProps) {
   const [reducedMotion, setReducedMotion] = useState(
     () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
-  const [videoReady, setVideoReady] = useState(false)
-  const [videoFailed, setVideoFailed] = useState(false)
+  // Readiness is tied to the active theme so a newly mounted video can never
+  // inherit the previous video's ready state during a theme switch.
+  const [readyTheme, setReadyTheme] = useState<Theme | null>(null)
+  const [failedTheme, setFailedTheme] = useState<Theme | null>(null)
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -27,36 +29,32 @@ export default function HeroVisual({ theme }: HeroVisualProps) {
     return () => preference.removeEventListener('change', updatePreference)
   }, [])
 
-  // The theme-keyed video below mounts only the active source. The CSS fallback
-  // remains visible until that source can play, so switching themes never exposes
-  // an empty frame or downloads both full videos at once.
-  useEffect(() => {
-    setVideoReady(false)
-    setVideoFailed(false)
-  }, [theme])
-
   return (
     <div
       className={`entity-stage hero-video-stage theme-${theme}`}
       role="img"
       aria-label="Dev Engine AI animated hero artwork"
     >
-      <div className="hero-video-fallback" style={{ backgroundImage: `url("${posterSources[theme]}")` }} aria-hidden="true" />
-      {!reducedMotion && !videoFailed && (
+      <div
+        className="hero-video-fallback"
+        style={{ backgroundImage: `url("${posterSources[theme]}")` }}
+        aria-hidden="true"
+      />
+      {!reducedMotion && failedTheme !== theme && (
         <video
           key={theme}
-          className={`hero-background-video${videoReady ? ' is-ready' : ''}`}
+          className={`hero-background-video${readyTheme === theme ? ' is-ready' : ''}`}
           src={videoSources[theme]}
           autoPlay
           muted
           playsInline
           loop
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
           disablePictureInPicture
           controls={false}
-          onCanPlay={() => setVideoReady(true)}
-          onError={() => setVideoFailed(true)}
+          onCanPlay={() => setReadyTheme(theme)}
+          onError={() => setFailedTheme(theme)}
         />
       )}
     </div>
