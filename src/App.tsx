@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { FormEvent, ReactNode } from 'react'
+import type { FormEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowDown, ArrowUpRight, Check, Plus, Send, Sparkles } from 'lucide-react'
 import Navbar from './components/Navbar'
