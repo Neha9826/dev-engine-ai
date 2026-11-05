@@ -155,7 +155,7 @@ function Intelligence({ theme }: { theme: Theme }) {
             muted
             loop
             playsInline
-            preload={artworkInView ? 'auto' : 'none'}
+            preload={artworkInView ? 'auto' : 'metadata'}
             poster="/images/Information-to-Intelligent-Outcomes.png"
             aria-label="Animated information-to-intelligence artwork"
             onError={() => setVideoFailed(true)}
