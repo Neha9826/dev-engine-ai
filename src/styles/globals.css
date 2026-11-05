@@ -64,7 +64,7 @@
 :root[data-theme=dark] .hero-video-fallback{background:radial-gradient(ellipse at 52% 48%,#a259ff35 0%,#ec70cf16 40%,transparent 72%),linear-gradient(135deg,#140d1e,#0c0812)}
 .hero-background-video{z-index:1;object-fit:cover;object-position:center;background:transparent;opacity:0;transition:opacity .35s ease}
 .hero-background-video.is-ready{opacity:1}
-.hero-video-stage:after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 82%,transparent) 38%,color-mix(in srgb,var(--bg) 42%,transparent) 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 55%,transparent),transparent 35%,color-mix(in srgb,var(--bg) 25%,transparent));}
-:root[data-theme=dark] .hero-video-stage:after{background:linear-gradient(90deg,#0c0812e8 0%,#0c0812a8 42%,#0c081244 100%),linear-gradient(0deg,#0c081280,transparent 42%,#0c081244)}
+/* Keep the approved background video at its original, unobscured quality. */
+.hero-video-stage:after{content:none}
 @media(prefers-reduced-motion:reduce){.hero-background-video{display:none}}
 @media(prefers-reduced-motion:reduce){.hero-background-video{display:none}.hero-video-fallback{background:radial-gradient(ellipse at 50% 48%,#c084ff35,transparent 68%),var(--bg-soft)}}
