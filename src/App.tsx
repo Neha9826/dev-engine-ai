@@ -63,17 +63,45 @@ function Studio() {
   </div></section>
 }
 
+const lifecycleFlows = [
+  { label: 'DISCOVERY WORKFLOW', nodes: [['Stakeholders','Goals & context'],['User needs','Research signals'],['Problem brief','Opportunity'],['Success metrics','Shared outcomes']] },
+  { label: 'PRODUCT ROADMAP', nodes: [['Product vision','Desired outcome'],['Prioritisation','Value × effort'],['Milestones','Release slices'],['Delivery plan','Owners & timing']] },
+  { label: 'SYSTEM ARCHITECTURE', nodes: [['Client apps','Web · mobile'],['API layer','Contracts · auth'],['Services','Domain logic'],['Data layer','SQL · cache']] },
+  { label: 'EXPERIENCE DESIGN', nodes: [['Research','User signals'],['User journeys','Flows & states'],['Prototype','Test assumptions'],['Design system','Reusable UI']] },
+  { label: 'APPLICATION BUILD', nodes: [['Frontend','React · Next.js'],['API services','Node · TypeScript'],['Data models','Postgres · Redis'],['Test suite','Jest · Playwright']] },
+  { label: 'RETRIEVAL-AUGMENTED GENERATION', nodes: [['Source docs','PDF · HTML · DB'],['Chunk & embed','Text vectors'],['Vector store','Indexed context'],['Retrieve','Top-k matches'],['LLM prompt','Grounded answer']] },
+  { label: 'QUALITY GATES', nodes: [['Unit tests','Logic'],['Integration','Contracts'],['E2E tests','User journeys'],['Security & perf','Release gates']] },
+  { label: 'PRODUCTION DELIVERY', nodes: [['Git commit','Reviewed change'],['CI pipeline','Build · test'],['Container','Docker image'],['Cloud deploy','AWS · runtime'],['Observe','Logs · metrics']] },
+  { label: 'CONTINUOUS IMPROVEMENT', nodes: [['Product signals','Usage data'],['User feedback','Real-world needs'],['Experiments','Measure impact'],['Iteration','Next release']] },
+]
+
 function Lifecycle() {
   const [active, setActive] = useState(0)
   const stage = lifecycle[active]
+  const flow = lifecycleFlows[active]
   return <section className="section lifecycle-section" id="lifecycle"><div className="container">
-    <div className="lifecycle-heading"><SectionHeading eyebrow="THE SOFTWARE LIFECYCLE / 03" title={<>From first thought<br />to <em>what's next.</em></>} text="A complete engineering journey, shaped around your goals. Explore each stage to see how we move an idea into a product that is ready for the real world." /><div className="lifecycle-stamp"><Sparkles size={18} /><span>ONE CONTINUOUS<br />ENGINEERING PARTNERSHIP</span></div></div>
+    <div className="lifecycle-heading"><SectionHeading eyebrow="THE SOFTWARE LIFECYCLE / 03" title={<>From first thought<br />to <em>what's next.</em></>} text="A complete engineering journey, shaped around your goals. Explore each stage to see how an idea becomes a dependable, intelligent product." /><div className="lifecycle-stamp"><Sparkles size={18} /><span>ONE CONTINUOUS<br />ENGINEERING PARTNERSHIP</span></div></div>
     <div className="lifecycle-shell">
       <div className="lifecycle-rail" role="tablist" aria-label="Software lifecycle stages">{lifecycle.map((item, i) => <button key={item.n} className={active === i ? 'active' : ''} role="tab" aria-selected={active === i} aria-controls="lifecycle-detail" onClick={() => setActive(i)}><span className="rail-number">{item.n}</span><span className="rail-title">{item.title}</span><span className="rail-dot" /></button>)}</div>
       <div className="lifecycle-detail" id="lifecycle-detail" role="tabpanel">
         <div className="lifecycle-stage-top"><span>STAGE {stage.n} / 09</span><span>DEV ENGINE METHOD</span></div>
-        <div className="lifecycle-artifact" aria-hidden="true"><div className="artifact-orbit orbit-one" /><div className="artifact-orbit orbit-two" /><div className="artifact-core"><div className="artifact-glass"><Sparkles size={30} /></div></div><div className="artifact-beam beam-one" /><div className="artifact-beam beam-two" /><span className="artifact-caption">IDEA → IMPACT</span></div>
-        <AnimatePresence mode="wait"><motion.div className="stage-copy" key={stage.n} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .22 }}><span className="stage-kicker">{stage.short}</span><h3>{stage.title}</h3><p>{stage.desc}</p><div className="stage-work"><strong>WHAT HAPPENS HERE</strong><ul>{stage.work.map(w => <li key={w}><Check size={14} />{w}</li>)}</ul></div><div className="stage-output"><span>THE OUTPUT</span><strong>{stage.output}</strong></div><div className="stage-tools">{stage.tools}</div></motion.div></AnimatePresence>
+        <div className="lifecycle-flow-wrap">
+          <div className="flow-heading"><span>{flow.label}</span><span>LIVE SYSTEM MAP <i /></span></div>
+          <div className="lifecycle-flow" style={{'--flow-count': flow.nodes.length} as React.CSSProperties}>
+            {flow.nodes.map(([title, detail], i) => <div className="flow-step-group" key={title}>
+              <motion.div className="flow-node" key={stage.n + title} initial={{opacity:0,y:10,scale:.97}} animate={{opacity:1,y:0,scale:1}} transition={{duration:.28,delay:i*.075}}>
+                <span className="flow-node-index">0{i+1}</span><strong>{title}</strong><small>{detail}</small><span className="flow-node-status"><Check size={11}/></span>
+              </motion.div>
+              {i < flow.nodes.length - 1 && <div className="flow-link" aria-hidden="true"><span /></div>}
+            </div>)}
+          </div>
+          {active === 2 && <div className="architecture-security"><span>SECURITY BOUNDARIES</span><div><i>Session</i><i>JWT</i><i>OAuth</i><i>API keys</i><i>SSO</i><i>mTLS</i></div></div>}
+          {active === 5 && <div className="architecture-security"><span>GROUNDING LAYER</span><div><i>Metadata filters</i><i>Semantic search</i><i>Source citations</i><i>Access control</i></div></div>}
+        </div>
+        <AnimatePresence mode="wait"><motion.div className="stage-copy" key={stage.n} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .22 }}>
+          <div className="stage-summary"><span className="stage-kicker">{stage.short}</span><h3>{stage.title}</h3><p>{stage.desc}</p><div className="stage-output"><span>THE OUTPUT</span><strong>{stage.output}</strong></div></div>
+          <div className="stage-work"><strong>WHAT HAPPENS HERE</strong><ul>{stage.work.map(w => <li key={w}><Check size={14} />{w}</li>)}</ul><div className="stage-tools">{stage.tools}</div></div>
+        </motion.div></AnimatePresence>
         <div className="lifecycle-controls"><button onClick={() => setActive(v => Math.max(0, v - 1))} disabled={active === 0}>PREVIOUS</button><span>{String(active + 1).padStart(2, '0')} <i /> 09</span><button onClick={() => setActive(v => Math.min(8, v + 1))} disabled={active === 8}>NEXT STAGE <ArrowRight size={14} /></button></div>
       </div>
     </div>
