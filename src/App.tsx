@@ -9,14 +9,11 @@ import SectionHeading from './components/SectionHeading'
 import { faqs, principles, projects, services } from './data/content'
 
 const lifecycleStages = [
-  { n: '01', title: 'Discovery & strategy', items: ['Business idea', 'Requirements', 'User journeys', 'Product roadmap'] },
-  { n: '02', title: 'System architecture', items: ['Frontend', 'Backend & APIs', 'Database', 'Auth & infrastructure'] },
-  { n: '03', title: 'Experience & design', items: ['UI / UX', 'Design systems', 'Reusable components', 'Responsive interfaces'] },
-  { n: '04', title: 'Full-stack development', items: ['Frontend apps', 'Backend services', 'Business logic', 'Data & integrations'] },
-  { n: '05', title: 'AI engineering', items: ['LLMs & agents', 'RAG pipelines', 'Embeddings & vector search', 'Grounded responses'] },
-  { n: '06', title: 'Quality & security', items: ['Unit & integration', 'End-to-end tests', 'Security validation', 'Performance checks'] },
-  { n: '07', title: 'Cloud & deployment', items: ['CI / CD', 'Containers', 'Cloud runtime', 'Monitoring'] },
-  { n: '08', title: 'Continuous evolution', items: ['Product signals', 'Optimization', 'Scaling', 'New capabilities'] },
+  { n: '01', title: 'IDEA', summary: 'Understand what needs to be built.', labels: ['Strategy', 'Research', 'Roadmap'] },
+  { n: '02', title: 'PLAN', summary: 'Design the foundation before building.', labels: ['Architecture', 'Experience', 'Infrastructure'] },
+  { n: '03', title: 'BUILD', summary: 'Turn the blueprint into a real product.', labels: ['Full-stack', 'APIs', 'AI & RAG', 'Integrations'] },
+  { n: '04', title: 'LAUNCH', summary: 'Make the product production-ready.', labels: ['Testing', 'Security', 'Cloud', 'Deployment'] },
+  { n: '05', title: 'GROW', summary: 'Keep improving as the business evolves.', labels: ['Monitoring', 'Optimization', 'Scaling', 'Evolution'] },
 ]
 
 type Theme = 'light' | 'dark'
@@ -62,88 +59,56 @@ function Studio() {
   </div></section>
 }
 
-function FlowToken({ children }: { children: ReactNode }) {
-  return <span className="lifecycle-token">{children}</span>
-}
-
-function MiniFlow({ items }: { items: string[] }) {
-  return <div className="mini-flow">{items.map((item, i) => <span className="mini-flow-node" key={item}>{item}{i < items.length - 1 && <i aria-hidden="true" />}</span>)}</div>
-}
-
 function Lifecycle() {
   return <section className="section lifecycle-section" id="lifecycle">
     <div className="container">
       <div className="lifecycle-heading">
-        <SectionHeading eyebrow="THE SOFTWARE LIFECYCLE / 03" title={<>From first thought<br />to <em>what's next.</em></>} text="One connected engineering journey—from the first product idea to a system that keeps learning, scaling and improving." />
-        <div className="lifecycle-stamp"><Sparkles size={18} /><span>IDEA TO PRODUCTION<br />AND BEYOND</span></div>
+        <SectionHeading eyebrow="THE SOFTWARE LIFECYCLE / 03" title={<>From first thought<br />to <em>what's next.</em></>} text="One partner to turn an early idea into a product people can use, trust and grow with." />
+        <div className="lifecycle-stamp"><Sparkles size={18} /><span>IDEA TO PRODUCT<br />AND BEYOND</span></div>
       </div>
-      <div className="lifecycle-blueprint" aria-label="Complete software engineering lifecycle diagram">
-        <div className="blueprint-origin"><span className="origin-orbit"><Sparkles size={19} /></span><div><small>THE STARTING POINT</small><strong>IDEA</strong><span>Business opportunity</span></div><i aria-hidden="true" /></div>
-        <div className="lifecycle-grid">
-          <motion.article className="life-stage life-discovery" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45}}>
-            <StageHeading stage={lifecycleStages[0]} />
-            <div className="discovery-map"><div className="discovery-input">BUSINESS SIGNAL</div><div className="discovery-branches"><span>USER NEEDS</span><span>REQUIREMENTS</span><span>OPPORTUNITY</span></div><div className="discovery-output">PRODUCT ROADMAP <b>→</b></div></div>
-            <StageFooter items={lifecycleStages[0].items} />
-          </motion.article>
-          <motion.article className="life-stage life-architecture" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.04}}>
-            <StageHeading stage={lifecycleStages[1]} />
-            <div className="architecture-map">
-              <div className="arch-client">FRONTEND <small>Web · Mobile</small></div><div className="arch-api">API LAYER <small>REST · GraphQL</small></div>
-              <div className="arch-services"><span>AUTH</span><span>BACKEND</span><span>INTEGRATIONS</span></div>
-              <div className="arch-data">DATABASE <small>SQL · Cache · Storage</small></div>
-              <div className="arch-infra">CLOUD INFRASTRUCTURE</div>
-              <svg viewBox="0 0 300 112" preserveAspectRatio="none" aria-hidden="true"><path d="M150 12 V29 M150 48 V61 M150 80 V91 M150 91 H45 V101 M150 91 H255 V101" /><path d="M150 48 H45 V61 M150 48 H255 V61" /></svg>
-            </div>
-            <StageFooter items={lifecycleStages[1].items} />
-          </motion.article>
-          <motion.article className="life-stage life-design" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.08}}>
-            <StageHeading stage={lifecycleStages[2]} />
-            <div className="design-map"><div className="design-screen"><span/><span/><span/><b/><i/><i/><i/></div><div className="design-kit"><span>TYPE</span><b/><span>COLOUR</span><b/><span>COMPONENTS</span><div><i/><i/><i/></div></div><div className="design-breakpoints"><span>DESKTOP</span><span>TABLET</span><span>MOBILE</span></div></div>
-            <StageFooter items={lifecycleStages[2].items} />
-          </motion.article>
-          <motion.article className="life-stage life-development" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.12}}>
-            <StageHeading stage={lifecycleStages[3]} />
-            <div className="stack-map"><div className="stack-front">FRONTEND <small>React · Next.js</small></div><div className="stack-connection">↕ API / EVENTS ↕</div><div className="stack-back">BACKEND <small>Services · Logic</small></div><div className="stack-data">DATA LAYER <small>Postgres · Redis</small></div></div>
-            <StageFooter items={lifecycleStages[3].items} />
-          </motion.article>
-          <motion.article className="life-stage life-ai" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.16}}>
-            <StageHeading stage={lifecycleStages[4]} />
-            <div className="rag-map">
-              <div className="rag-lane"><b>OFFLINE / KNOWLEDGE INGESTION</b><MiniFlow items={['Documents','Extract','Chunk','Embeddings','Vector DB']} /></div>
-              <div className="rag-lane rag-online"><b>ONLINE / QUERY & RESPONSE</b><MiniFlow items={['User query','Query vector','Retrieve','Context','LLM','Answer']} /></div>
-              <div className="rag-link"><span>INDEXED VECTORS + METADATA</span><i/> <span>TOP-K CONTEXT</span></div>
-            </div>
-            <StageFooter items={lifecycleStages[4].items} />
-          </motion.article>
-          <motion.article className="life-stage life-quality" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.2}}>
-            <StageHeading stage={lifecycleStages[5]} />
-            <div className="quality-map"><div className="quality-gate"><span>01</span><b>UNIT</b><i>✓</i></div><div className="quality-gate"><span>02</span><b>INTEGRATION</b><i>✓</i></div><div className="quality-gate"><span>03</span><b>E2E</b><i>✓</i></div><div className="quality-gate"><span>04</span><b>SECURITY + PERF</b><i>✓</i></div></div>
-            <StageFooter items={lifecycleStages[5].items} />
-          </motion.article>
-          <motion.article className="life-stage life-deploy" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.24}}>
-            <StageHeading stage={lifecycleStages[6]} />
-            <div className="deploy-map"><MiniFlow items={['Commit','Build','Test','Container','Cloud']} /><div className="deploy-cloud"><span>LIVE PRODUCTION</span><b>◉</b><small>Logs · Metrics · Traces</small></div></div>
-            <StageFooter items={lifecycleStages[6].items} />
-          </motion.article>
-          <motion.article className="life-stage life-evolution" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.28}}>
-            <StageHeading stage={lifecycleStages[7]} />
-            <div className="evolution-map"><div className="evolution-core">LIVE<br/>SYSTEM</div><span className="evo-node evo-a">SIGNALS</span><span className="evo-node evo-b">INSIGHTS</span><span className="evo-node evo-c">OPTIMIZE</span><span className="evo-node evo-d">SCALE</span><svg viewBox="0 0 260 112" aria-hidden="true"><path d="M130 14 C245 14 250 92 130 96 C10 100 15 20 130 14" /></svg></div>
-            <StageFooter items={lifecycleStages[7].items} />
-          </motion.article>
-        </div>
-        <div className="blueprint-return"><span>OBSERVE</span><i/><span>LEARN</span><i/><span>IMPROVE</span><i/><strong>FEEDBACK INTO THE NEXT IDEA ↺</strong></div>
+      <div className="journey" aria-label="Five stages: idea, plan, build, launch and grow">
+        <div className="journey-track" aria-hidden="true"><span /></div>
+        <motion.article className="journey-stage journey-idea" initial={{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.16}} transition={{duration:.55}}>
+          <div className="journey-art idea-art" aria-hidden="true">
+            <div className="idea-glow" /><div className="idea-bulb"><svg viewBox="0 0 120 140"><path d="M60 12a36 36 0 0 0-22 64c7 6 10 14 11 22h22c1-8 4-16 11-22A36 36 0 0 0 60 12Z" /><path d="M47 106h26M49 116h22M53 125h14M60 30v18M38 42l9 8M82 42l-9 8" /></svg></div>
+            <div className="idea-orbit orbit-one" /><div className="idea-orbit orbit-two" />
+            <div className="idea-roadmap"><span>01</span><i/><span>02</span><i/><span>03</span></div>
+            <span className="art-caption">A CLEAR DIRECTION</span>
+          </div>
+          <div className="journey-copy"><span className="journey-number">01 / START WITH WHY</span><h3>IDEA</h3><p>{lifecycleStages[0].summary}</p><div className="journey-tags">{lifecycleStages[0].labels.map(x=><span key={x}>{x}</span>)}</div></div>
+        </motion.article>
+        <motion.article className="journey-stage journey-plan" initial={{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.16}} transition={{duration:.55,delay:.06}}>
+          <div className="journey-art plan-art" aria-hidden="true">
+            <div className="blueprint-glow" /><div className="blueprint-sheet"><div className="blueprint-top"><i/><i/><i/></div><div className="blueprint-layer layer-front">EXPERIENCE</div><div className="blueprint-link">↕</div><div className="blueprint-layer layer-back">APPLICATION</div><div className="blueprint-branches"><span>DATA</span><span>INFRA</span></div></div>
+            <div className="plan-orbit" /><span className="art-caption">A FOUNDATION THAT FITS</span>
+          </div>
+          <div className="journey-copy"><span className="journey-number">02 / MAKE A PLAN</span><h3>PLAN</h3><p>{lifecycleStages[1].summary}</p><div className="journey-tags">{lifecycleStages[1].labels.map(x=><span key={x}>{x}</span>)}</div></div>
+        </motion.article>
+        <motion.article className="journey-stage journey-build" initial={{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.16}} transition={{duration:.6,delay:.12}}>
+          <div className="build-ribbon">THE PRODUCT TAKES SHAPE <span>✦</span></div>
+          <div className="journey-art build-art" aria-hidden="true">
+            <div className="build-aura" /><div className="product-window"><div className="product-bar"><i/><i/><i/><span>YOUR PRODUCT</span></div><div className="product-ui"><div className="product-sidebar"><b/><i/><i/><i/></div><div className="product-main"><span className="ui-kicker">OVERVIEW</span><b className="ui-heading"/><div className="ui-metrics"><i/><i/><i/></div><div className="ui-chart"><svg viewBox="0 0 220 65"><path d="M4 52 C30 44 35 49 57 30 S92 43 115 22 S155 34 178 12 S202 18 216 4"/></svg></div><div className="ui-lines"><i/><i/><i/></div></div></div></div>
+            <div className="build-node node-api">API</div><div className="build-node node-data">DATA</div><div className="build-node node-ai"><Sparkles size={14}/> AI</div><div className="build-flow flow-a"/><div className="build-flow flow-b"/><div className="build-flow flow-c"/>
+            <div className="ai-knowledge"><span>DOCUMENTS</span><i>→</i><b>AI KNOWLEDGE</b><i>→</i><span>ANSWERS</span></div>
+          </div>
+          <div className="journey-copy"><span className="journey-number">03 / ENGINEER THE PRODUCT</span><h3>BUILD</h3><p>{lifecycleStages[2].summary}</p><div className="journey-tags">{lifecycleStages[2].labels.map(x=><span key={x}>{x}</span>)}</div></div>
+        </motion.article>
+        <motion.article className="journey-stage journey-launch" initial={{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.16}} transition={{duration:.55,delay:.18}}>
+          <div className="journey-art launch-art" aria-hidden="true">
+            <div className="launch-cloud"><svg viewBox="0 0 180 120"><path d="M42 87h94a27 27 0 0 0 0-54 39 39 0 0 0-73-7A31 31 0 0 0 42 87Z"/><path d="M90 70V38m-13 13 13-13 13 13"/></svg></div><div className="launch-screen"><span/><b/><i/><i/><i/></div><div className="launch-check">✓</div><span className="art-caption">READY FOR THE REAL WORLD</span>
+          </div>
+          <div className="journey-copy"><span className="journey-number">04 / GO LIVE</span><h3>LAUNCH</h3><p>{lifecycleStages[3].summary}</p><div className="journey-tags">{lifecycleStages[3].labels.map(x=><span key={x}>{x}</span>)}</div></div>
+        </motion.article>
+        <motion.article className="journey-stage journey-grow" initial={{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.16}} transition={{duration:.55,delay:.24}}>
+          <div className="journey-art grow-art" aria-hidden="true">
+            <div className="growth-glow"/><div className="growth-core">LIVE<br/>PRODUCT</div><div className="growth-ring ring-a"/><div className="growth-ring ring-b"/><div className="growth-point point-a">↗</div><div className="growth-point point-b">+</div><div className="growth-point point-c">↗</div><div className="growth-bars"><i/><i/><i/><i/><i/><i/></div><span className="art-caption">LEARN · IMPROVE · SCALE</span>
+          </div>
+          <div className="journey-copy"><span className="journey-number">05 / KEEP MOVING</span><h3>GROW</h3><p>{lifecycleStages[4].summary}</p><div className="journey-tags">{lifecycleStages[4].labels.map(x=><span key={x}>{x}</span>)}</div></div>
+        </motion.article>
+        <div className="journey-feedback" aria-hidden="true"><span>REAL-WORLD FEEDBACK</span><i/> <b>BACK INTO THE NEXT IDEA ↺</b></div>
       </div>
-      <div className="lifecycle-legend"><span><i/> ENGINEERING FLOW</span><span><i/> DATA / API CONNECTION</span><span><i/> CONTINUOUS FEEDBACK</span><span>ONE PARTNER · IDEA TO EVOLUTION</span></div>
     </div>
   </section>
-}
-
-function StageHeading({ stage }: { stage: { n: string; title: string } }) {
-  return <div className="life-stage-heading"><span>{stage.n}</span><h3>{stage.title}</h3><i aria-hidden="true"/></div>
-}
-
-function StageFooter({ items }: { items: string[] }) {
-  return <div className="life-stage-footer">{items.map(item => <FlowToken key={item}>{item}</FlowToken>)}</div>
 }
 
 function Intelligence() {
