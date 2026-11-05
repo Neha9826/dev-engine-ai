@@ -64,40 +64,57 @@ function Studio() {
 }
 
 const lifecycleFlows = [
-  { label: 'DISCOVERY WORKFLOW', nodes: [['Stakeholders','Goals & context'],['User needs','Research signals'],['Problem brief','Opportunity'],['Success metrics','Shared outcomes']] },
-  { label: 'PRODUCT ROADMAP', nodes: [['Product vision','Desired outcome'],['Prioritisation','Value × effort'],['Milestones','Release slices'],['Delivery plan','Owners & timing']] },
-  { label: 'SYSTEM ARCHITECTURE', nodes: [['Client apps','Web · mobile'],['API layer','Contracts · auth'],['Services','Domain logic'],['Data layer','SQL · cache']] },
-  { label: 'EXPERIENCE DESIGN', nodes: [['Research','User signals'],['User journeys','Flows & states'],['Prototype','Test assumptions'],['Design system','Reusable UI']] },
-  { label: 'APPLICATION BUILD', nodes: [['Frontend','React · Next.js'],['API services','Node · TypeScript'],['Data models','Postgres · Redis'],['Test suite','Jest · Playwright']] },
-  { label: 'RETRIEVAL-AUGMENTED GENERATION', nodes: [['Source docs','PDF · HTML · DB'],['Chunk & embed','Text vectors'],['Vector store','Indexed context'],['Retrieve','Top-k matches'],['LLM prompt','Grounded answer']] },
-  { label: 'QUALITY GATES', nodes: [['Unit tests','Logic'],['Integration','Contracts'],['E2E tests','User journeys'],['Security & perf','Release gates']] },
-  { label: 'PRODUCTION DELIVERY', nodes: [['Git commit','Reviewed change'],['CI pipeline','Build · test'],['Container','Docker image'],['Cloud deploy','AWS · runtime'],['Observe','Logs · metrics']] },
-  { label: 'CONTINUOUS IMPROVEMENT', nodes: [['Product signals','Usage data'],['User feedback','Real-world needs'],['Experiments','Measure impact'],['Iteration','Next release']] },
+  { label: 'DISCOVERY WORKFLOW', caption: 'Turn raw signals into a validated opportunity.', nodes: [['Stakeholders','Goals & context'],['User research','Needs & friction'],['Problem brief','Opportunity'],['Success metrics','Shared outcomes']] },
+  { label: 'PRODUCT ROADMAP', caption: 'Translate product intent into a delivery sequence.', nodes: [['Product vision','Desired outcome'],['Prioritisation','Value × effort'],['Milestones','Release slices'],['Delivery plan','Owners & timing']] },
+  { label: 'SYSTEM ARCHITECTURE', caption: 'A secure path from client request to persistent data.', nodes: [['Client apps','Web · mobile'],['API gateway','Routing · auth'],['Domain services','Business logic'],['Data layer','SQL · cache']] },
+  { label: 'EXPERIENCE DESIGN', caption: 'Move from user insight to a tested interface system.', nodes: [['Research','User signals'],['Journey map','Flows & states'],['Prototype','Test assumptions'],['Design system','Reusable UI']] },
+  { label: 'APPLICATION BUILD', caption: 'Ship cohesive product increments across the stack.', nodes: [['Frontend','React · Next.js'],['API services','Node · TypeScript'],['Data models','Postgres · Redis'],['Test suite','Jest · Playwright']] },
+  { label: 'RETRIEVAL-AUGMENTED GENERATION', caption: 'Two connected pipelines: prepare trusted knowledge, then retrieve it at query time.', ingestion: [['Source documents','PDF · HTML · DB'],['Extract & chunk','Clean text · segments'],['Embed content','Vector representation'],['Vector index','Metadata · source IDs']], retrieval: [['User query','Question · intent'],['Query embedding','Semantic vector'],['Vector retrieval','Top-k · filters'],['Prompt assembly','Context · citations'],['LLM response','Grounded answer']] },
+  { label: 'QUALITY GATES', caption: 'Validate behaviour, security and performance before release.', nodes: [['Unit tests','Logic'],['Integration','Contracts'],['E2E tests','User journeys'],['Security & perf','Release gates']] },
+  { label: 'PRODUCTION DELIVERY', caption: 'Automate the path from reviewed change to observable runtime.', nodes: [['Git commit','Reviewed change'],['CI pipeline','Build · test'],['Container','Docker image'],['Cloud deploy','AWS · runtime'],['Observe','Logs · metrics']] },
+  { label: 'CONTINUOUS IMPROVEMENT', caption: 'Feed real-world product signals into the next iteration.', nodes: [['Product signals','Usage data'],['User feedback','Real-world needs'],['Experiments','Measure impact'],['Iteration','Next release']] },
 ]
+
+function FlowNode({ node, index }: { node: string[]; index: number }) {
+  return <motion.div className="diagram-node" initial={{ opacity: 0, y: 12, scale: .97 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: .32, delay: index * .08 }}>
+    <span className="diagram-node-index">{String(index + 1).padStart(2, '0')}</span>
+    <span className="diagram-node-mark"><i /></span>
+    <strong>{node[0]}</strong>
+    <small>{node[1]}</small>
+    <span className="diagram-node-state"><Check size={10} /> READY</span>
+  </motion.div>
+}
 
 function Lifecycle() {
   const [active, setActive] = useState(0)
   const stage = lifecycle[active]
   const flow = lifecycleFlows[active]
+  const isRag = active === 5
   return <section className="section lifecycle-section" id="lifecycle"><div className="container">
     <div className="lifecycle-heading"><SectionHeading eyebrow="THE SOFTWARE LIFECYCLE / 03" title={<>From first thought<br />to <em>what's next.</em></>} text="A complete engineering journey, shaped around your goals. Explore each stage to see how an idea becomes a dependable, intelligent product." /><div className="lifecycle-stamp"><Sparkles size={18} /><span>ONE CONTINUOUS<br />ENGINEERING PARTNERSHIP</span></div></div>
     <div className="lifecycle-shell">
       <div className="lifecycle-rail" role="tablist" aria-label="Software lifecycle stages">{lifecycle.map((item, i) => <button key={item.n} className={active === i ? 'active' : ''} role="tab" aria-selected={active === i} aria-controls="lifecycle-detail" onClick={() => setActive(i)}><span className="rail-number">{item.n}</span><span className="rail-title">{item.title}</span><span className="rail-dot" /></button>)}</div>
       <div className="lifecycle-detail" id="lifecycle-detail" role="tabpanel">
-        <div className="lifecycle-stage-top"><span>STAGE {stage.n} / 09</span><span>DEV ENGINE METHOD</span></div>
-        <div className="lifecycle-flow-wrap">
-          <div className="flow-heading"><span>{flow.label}</span><span>LIVE SYSTEM MAP <i /></span></div>
-          <div className="lifecycle-flow" style={{'--flow-count': flow.nodes.length} as React.CSSProperties}>
-            {flow.nodes.map(([title, detail], i) => <div className="flow-step-group" key={title}>
-              <motion.div className="flow-node" key={stage.n + title} initial={{opacity:0,y:10,scale:.97}} animate={{opacity:1,y:0,scale:1}} transition={{duration:.28,delay:i*.075}}>
-                <span className="flow-node-index">0{i+1}</span><strong>{title}</strong><small>{detail}</small><span className="flow-node-status"><Check size={11}/></span>
-              </motion.div>
-              {i < flow.nodes.length - 1 && <div className="flow-link" aria-hidden="true"><span /></div>}
-            </div>)}
-          </div>
-          {active === 2 && <div className="architecture-security"><span>SECURITY BOUNDARIES</span><div><i>Session</i><i>JWT</i><i>OAuth</i><i>API keys</i><i>SSO</i><i>mTLS</i></div></div>}
-          {active === 5 && <div className="architecture-security"><span>GROUNDING LAYER</span><div><i>Metadata filters</i><i>Semantic search</i><i>Source citations</i><i>Access control</i></div></div>}
-        </div>
+        <div className="lifecycle-stage-top"><span>STAGE {stage.n} / 09</span><span>DEV ENGINE METHOD <i /></span></div>
+        <AnimatePresence mode="wait">
+          <motion.div className="lifecycle-diagram" key={stage.n} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .24 }}>
+            <div className="diagram-toolbar"><div><span className="diagram-live-dot" /> SYSTEM WORKFLOW <b>/</b> {flow.label}</div><span className="diagram-caption">{flow.caption}</span></div>
+            {isRag ? <div className="diagram-lanes">
+              <div className="diagram-lane">
+                <div className="diagram-lane-heading"><span>01</span><strong>KNOWLEDGE INGESTION</strong><small>OFFLINE · INDEXING</small></div>
+                <div className="diagram-node-row">{flow.ingestion!.map((node, i) => <div className="diagram-node-wrap" key={node[0]}><FlowNode node={node} index={i} />{i < flow.ingestion!.length - 1 && <span className="diagram-connector"><i /></span>}</div>)}</div>
+              </div>
+              <div className="diagram-bridge"><span>VECTOR DATABASE</span><i /><small>Embeddings + metadata + source references</small><i /></div>
+              <div className="diagram-lane online">
+                <div className="diagram-lane-heading"><span>02</span><strong>QUERY & RESPONSE</strong><small>ONLINE · INFERENCE</small></div>
+                <div className="diagram-node-row">{flow.retrieval!.map((node, i) => <div className="diagram-node-wrap" key={node[0]}><FlowNode node={node} index={i} />{i < flow.retrieval!.length - 1 && <span className="diagram-connector"><i /></span>}</div>)}</div>
+              </div>
+            </div> : <div className="diagram-node-row standard">{flow.nodes!.map((node, i) => <div className="diagram-node-wrap" key={node[0]}><FlowNode node={node} index={i} />{i < flow.nodes!.length - 1 && <span className="diagram-connector"><i /></span>}</div>)}</div>}
+            {active === 2 && <div className="diagram-foot"><span>TRUST & ACCESS CONTROL</span><div>{['Session cookie','JWT','OAuth','API key','SSO','mTLS'].map(item => <i key={item}>{item}</i>)}</div></div>}
+            {active === 5 && <div className="diagram-foot"><span>RETRIEVAL GUARDRAILS</span><div>{['Metadata filters','Tenant isolation','Source citations','Permission checks'].map(item => <i key={item}>{item}</i>)}</div></div>}
+            <div className="diagram-bottomline"><span>REQUEST / DATA PATH</span><span>CONNECTED STAGES <b>● ● ●</b></span></div>
+          </motion.div>
+        </AnimatePresence>
         <AnimatePresence mode="wait"><motion.div className="stage-copy" key={stage.n} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .22 }}>
           <div className="stage-summary"><span className="stage-kicker">{stage.short}</span><h3>{stage.title}</h3><p>{stage.desc}</p><div className="stage-output"><span>THE OUTPUT</span><strong>{stage.output}</strong></div></div>
           <div className="stage-work"><strong>WHAT HAPPENS HERE</strong><ul>{stage.work.map(w => <li key={w}><Check size={14} />{w}</li>)}</ul><div className="stage-tools">{stage.tools}</div></div>
