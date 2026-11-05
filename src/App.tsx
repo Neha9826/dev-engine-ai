@@ -91,7 +91,7 @@ function SelectedWork() {
 
 function Process() {
   const steps = [{ n: '01', title: 'Listen & understand', text: 'We learn about your goals, users, constraints and what success should look like.' }, { n: '02', title: 'Shape the approach', text: 'We align on scope, architecture, milestones and the right engagement model.' }, { n: '03', title: 'Build together', text: 'We deliver in clear increments, sharing progress and validating decisions as we go.' }, { n: '04', title: 'Launch & evolve', text: 'We prepare for production, hand over with clarity and help plan what comes next.' }]
-  return <section className="section process-section" id="process"><div className="container"><SectionHeading eyebrow="A CLEAR WAY FORWARD / 06" title={<>Clarity at every<br /><em>step of the journey.</em></>} text="A collaborative process that keeps decisions visible and delivery moving." /><div className="process-grid">{steps.map((s, i) => <article className="process-step" key={s.n}><span>{s.n}</span><div className="process-connector" /><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></div></section>
+  return <section className="section process-section" id="process"><div className="container"><SectionHeading eyebrow="A CLEAR WAY FORWARD / 06" title={<>Clarity at every<br /><em>step of the journey.</em></>} text="A collaborative process that keeps decisions visible and delivery moving." /><div className="process-grid">{steps.map((s) => <article className="process-step" key={s.n}><span>{s.n}</span><div className="process-connector" /><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></div></section>
 }
 
 function FAQ() {
