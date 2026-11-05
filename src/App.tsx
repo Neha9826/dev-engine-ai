@@ -117,19 +117,20 @@ function Intelligence({ theme }: { theme: Theme }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const artworkInView = useInView(artworkRef, { amount: 0.2 })
   const prefersReducedMotion = useReducedMotion()
-  const [videoFailed, setVideoFailed] = useState(false)
+  const [videoFailed, setVideoFailed] = useState<Record<Theme, boolean>>({ light: false, dark: false })
+  const currentVideoFailed = videoFailed[theme]
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-    if (prefersReducedMotion || !artworkInView || videoFailed) {
+    if (prefersReducedMotion || !artworkInView || currentVideoFailed) {
       video.pause()
       return
     }
     const playback = video.play()
     playback?.catch(() => setVideoFailed(true))
     return () => video.pause()
-  }, [theme, artworkInView, prefersReducedMotion, videoFailed])
+  }, [theme, artworkInView, prefersReducedMotion, currentVideoFailed])
 
   return <section className={theme === 'light' ? 'section intelligence-section intelligence-section-light' : 'section intelligence-section'}><div className="container intelligence-layout">
     {theme === 'light' ? (
@@ -141,7 +142,7 @@ function Intelligence({ theme }: { theme: Theme }) {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        {prefersReducedMotion || videoFailed ? (
+        {prefersReducedMotion || currentVideoFailed ? (
           <img
             src="/images/Information-to-Intelligent-Outcomes.png"
             alt="From information to intelligent outcomes"
@@ -159,14 +160,14 @@ function Intelligence({ theme }: { theme: Theme }) {
             preload={artworkInView ? 'auto' : 'metadata'}
             poster="/images/Information-to-Intelligent-Outcomes.png"
             aria-label="Animated information-to-intelligence artwork"
-            onError={() => setVideoFailed(true)}
+            onError={() => setVideoFailed(current => ({ ...current, [theme]: true }))}
           >
             <source src="/videos/information-to-intelligent-outcomes.mp4" type="video/mp4" />
           </video>
         )}
       </motion.div>
     ) : (
-      prefersReducedMotion || videoFailed ? (
+      prefersReducedMotion || currentVideoFailed ? (
         <div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div>
       ) : (
         <motion.div
@@ -187,7 +188,7 @@ function Intelligence({ theme }: { theme: Theme }) {
             playsInline
             preload={artworkInView ? 'auto' : 'metadata'}
             aria-label="Animated dark-theme information-to-intelligence artwork"
-            onError={() => setVideoFailed(true)}
+            onError={() => setVideoFailed(current => ({ ...current, [theme]: true }))}
           >
             <source src="/videos/information-to-intelligent-outcomes-dark.mp4" type="video/mp4" />
           </video>
