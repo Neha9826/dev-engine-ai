@@ -112,7 +112,25 @@ function Lifecycle() {
 }
 
 function Intelligence() {
-  return <section className="section intelligence-section"><div className="container intelligence-layout"><div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div><div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div><h2>AI that earns its place in the <em>product.</em></h2><p>We connect language models, retrieval, structured data and intelligent workflows to solve specific problems—not to add AI for the headline.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & document intelligence</span><span>AI agents & workflows</span><span>Vector search & data pipelines</span></div><a className="text-link" href="#contact">Explore an AI use case <ArrowUpRight size={16} /></a></div></div></section>
+  return <section className="section intelligence-section" id="intelligence">
+    <div className="container intelligence-showcase">
+      <div className="intelligence-zone-headings" aria-label="From information to intelligence">
+        <div className="intelligence-zone-heading"><h3>INFORMATION</h3><p>Your business data</p></div>
+        <div className="intelligence-zone-heading"><h3>INTELLIGENCE</h3><p>Understand · Reason · Transform</p></div>
+        <div className="intelligence-zone-heading"><h3>OUTCOMES</h3><p>Real, usable results</p></div>
+      </div>
+      <figure className="intelligence-artwork">
+        <img src="/images/intelligence-transformation-light.webp" alt="Business documents and structured data flow through a living violet AI intelligence core into intelligent document, answer and automated workflow experiences" />
+      </figure>
+      <div className="intelligence-copy">
+        <div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div>
+        <h2>AI that earns its place in the <em>product.</em></h2>
+        <p>We connect language models, retrieval, structured data and intelligent workflows to solve specific problems—not to add AI for the headline.</p>
+        <div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & document intelligence</span><span>AI agents & workflows</span><span>Vector search & data pipelines</span></div>
+        <a className="text-link" href="#contact">Explore an AI use case <ArrowUpRight size={16} /></a>
+      </div>
+    </div>
+  </section>
 }
 
 function SelectedWork() {
