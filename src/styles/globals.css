@@ -496,3 +496,51 @@ p{font-size:16px}
  .journey-stage{transition:none}
 }
 
+
+
+/* Approved information-to-intelligence artwork — light theme only */
+.intelligence-artwork{
+  position:relative;
+  isolation:isolate;
+  width:100%;
+  max-width:720px;
+  aspect-ratio:1671 / 941;
+  margin-inline:auto;
+  display:grid;
+  place-items:center;
+}
+.intelligence-artwork img{
+  position:relative;
+  z-index:1;
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+.intelligence-artwork-aura{
+  position:absolute;
+  z-index:0;
+  inset:12% 8%;
+  border-radius:50%;
+  background:radial-gradient(ellipse at center,#a259ff42 0%,#a259ff20 38%,transparent 72%);
+  filter:blur(24px);
+  opacity:0;
+  pointer-events:none;
+}
+.intelligence-artwork.is-visible .intelligence-artwork-aura{
+  opacity:.65;
+  animation:intelligence-artwork-breathe 6.5s ease-in-out infinite;
+}
+@keyframes intelligence-artwork-breathe{
+  0%,100%{opacity:.42;transform:scale(.97)}
+  50%{opacity:.72;transform:scale(1.035)}
+}
+@media(prefers-reduced-motion:reduce){
+  .intelligence-artwork-aura,
+  .intelligence-artwork.is-visible .intelligence-artwork-aura{
+    animation:none;
+    transition:none;
+    transform:none;
+    opacity:.45;
+  }
+}
