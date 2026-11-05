@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Plus, Send, Sparkles } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, Plus, Send, Sparkles } from 'lucide-react'
 import Navbar from './components/Navbar'
 import { Brand } from './components/Brand'
 import HeroVisual from './components/HeroVisual'
