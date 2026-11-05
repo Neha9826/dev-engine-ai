@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
+import { useRef } from 'react'
 import { ArrowDown, ArrowUpRight, Check, Plus, Send, Sparkles } from 'lucide-react'
 import Navbar from './components/Navbar'
 import { Brand } from './components/Brand'
@@ -111,8 +112,34 @@ function Lifecycle() {
   </section>
 }
 
-function Intelligence() {
-  return <section className="section intelligence-section"><div className="container intelligence-layout"><div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div><div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div><h2>AI that earns its place in the <em>product.</em></h2><p>We connect language models, retrieval, structured data and intelligent workflows to solve specific problems—not to add AI for the headline.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & document intelligence</span><span>AI agents & workflows</span><span>Vector search & data pipelines</span></div><a className="text-link" href="#contact">Explore an AI use case <ArrowUpRight size={16} /></a></div></div></section>
+function Intelligence({ theme }: { theme: Theme }) {
+  const artworkRef = useRef<HTMLDivElement>(null)
+  const artworkInView = useInView(artworkRef, { amount: 0.2 })
+  const prefersReducedMotion = useReducedMotion()
+
+  return <section className="section intelligence-section"><div className="container intelligence-layout">
+    {theme === 'light' ? (
+      <motion.div
+        ref={artworkRef}
+        className={`intelligence-artwork${artworkInView ? ' is-visible' : ''}`}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
+        whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        <span className="intelligence-artwork-aura" aria-hidden="true" />
+        <img
+          src="/images/Information-to-Intelligent-Outcomes.png"
+          alt="From information to intelligent outcomes"
+          loading="lazy"
+          decoding="async"
+        />
+      </motion.div>
+    ) : (
+      <div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div>
+    )}
+    <div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div><h2>AI that earns its place in the <em>product.</em></h2><p>We connect language models, retrieval, structured data and intelligent workflows to solve specific problems—not to add AI for the headline.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & document intelligence</span><span>AI agents & workflows</span><span>Vector search & data pipelines</span></div><a className="text-link" href="#contact">Explore an AI use case <ArrowUpRight size={16} /></a></div>
+  </div></section>
 }
 
 function SelectedWork() {
@@ -152,5 +179,5 @@ export default function App() {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0c0812' : '#fdfcfd')
     window.localStorage.setItem('dev-engine-theme', theme)
   }, [theme])
-  return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Services /><Studio /><Lifecycle /><Intelligence /><SelectedWork /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>INDEPENDENT BY DESIGN. ENGINEERED TO DELIVER.</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
+  return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Services /><Studio /><Lifecycle /><Intelligence theme={theme} /><SelectedWork /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>INDEPENDENT BY DESIGN. ENGINEERED TO DELIVER.</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
 }
