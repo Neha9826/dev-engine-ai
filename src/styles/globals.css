@@ -70,3 +70,41 @@
 .hero-video-stage:after{content:none}
 @media(prefers-reduced-motion:reduce){.hero-background-video{display:none}}
 @media(prefers-reduced-motion:reduce){.hero-background-video{display:none}.hero-video-fallback{background:radial-gradient(ellipse at 50% 48%,#c084ff35,transparent 68%),var(--bg-soft)}}
+
+
+/* Refined hero-to-content transition and site-wide readability */
+.hero-video-stage:after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:clamp(150px,20vw,245px);
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(to bottom,transparent 0%,color-mix(in srgb,var(--bg) 28%,transparent) 42%,var(--bg) 100%);
+}
+.hero:after{
+  height:1px;
+  opacity:.08;
+}
+body{font-size:16px}
+p{font-size:16px}
+.hero-description{font-size:17px;line-height:1.85}
+.section-heading p,.studio-copy>p,.intelligence-copy>p{font-size:16px;line-height:1.85}
+.button{font-size:13px}
+.text-link{font-size:13px}
+.eyebrow,.section-heading .eyebrow{font-size:10px}
+.hero-proof span{font-size:10px}
+.hero-foot{font-size:9px}
+.intro-aside{font-size:9px}
+.service-head{font-size:9px}
+.service-body small{font-size:9px}
+.service-body h3{font-size:21px}
+.service-body p{font-size:13px;line-height:1.75}
+.service-card li{font-size:11px}
+.principle p,.lifecycle-detail p,.project-row p,.faq-item p,.contact-copy p{font-size:15px;line-height:1.8}
+@media(max-width:760px){
+  .hero-description{font-size:15px}
+  .section-heading p,.studio-copy>p,.intelligence-copy>p{font-size:15px}
+  .hero-foot{font-size:8px}
+  .hero-video-stage:after{height:150px}
+}
