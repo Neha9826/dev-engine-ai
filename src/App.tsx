@@ -63,7 +63,7 @@ function Studio() {
   </div></section>
 }
 
-const lifecycleFlows = [
+const lifecycleFlows: { label: string; caption: string; nodes?: string[][]; ingestion?: string[][]; retrieval?: string[][] }[] = [
   { label: 'DISCOVERY WORKFLOW', caption: 'Turn raw signals into a validated opportunity.', nodes: [['Stakeholders','Goals & context'],['User research','Needs & friction'],['Problem brief','Opportunity'],['Success metrics','Shared outcomes']] },
   { label: 'PRODUCT ROADMAP', caption: 'Translate product intent into a delivery sequence.', nodes: [['Product vision','Desired outcome'],['Prioritisation','Value × effort'],['Milestones','Release slices'],['Delivery plan','Owners & timing']] },
   { label: 'SYSTEM ARCHITECTURE', caption: 'A secure path from client request to persistent data.', nodes: [['Client apps','Web · mobile'],['API gateway','Routing · auth'],['Domain services','Business logic'],['Data layer','SQL · cache']] },
