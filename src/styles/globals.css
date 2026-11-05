@@ -74,23 +74,25 @@
 
 /* Hero-to-services blend: let the next section fade upward over the hero edge. */
 .hero-video-stage:after{content:none}
-.services-section{position:relative;isolation:isolate}
+.services-section{position:relative;isolation:isolate;padding-top:42px}
 .services-section:before{
   content:"";
   position:absolute;
   left:0;
   right:0;
-  top:-230px;
-  height:230px;
-  z-index:0;
+  top:-320px;
+  height:320px;
+  z-index:2;
   pointer-events:none;
   background:linear-gradient(to bottom,
     color-mix(in srgb,var(--bg) 0%,transparent) 0%,
-    color-mix(in srgb,var(--bg) 12%,transparent) 28%,
-    color-mix(in srgb,var(--bg) 55%,transparent) 66%,
+    color-mix(in srgb,var(--bg) 7%,transparent) 22%,
+    color-mix(in srgb,var(--bg) 28%,transparent) 45%,
+    color-mix(in srgb,var(--bg) 72%,transparent) 76%,
     var(--bg) 100%);
 }
-.services-section>.container{position:relative;z-index:1}
+.services-section>.container{position:relative;z-index:3}
+.hero:after{opacity:0}
 .hero:after{
   height:1px;
   opacity:.08;
@@ -116,6 +118,6 @@ p{font-size:16px}
   .section-heading p,.studio-copy>p,.intelligence-copy>p{font-size:15px}
   .hero-foot{font-size:8px}
   .hero-video-stage:after{content:none}
-  .services-section{padding-top:68px}
-  .services-section:before{top:-155px;height:155px}
+  .services-section{padding-top:34px}
+  .services-section:before{top:-220px;height:220px}
 }
