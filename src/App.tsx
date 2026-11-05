@@ -128,7 +128,7 @@ function Intelligence({ theme }: { theme: Theme }) {
       return
     }
     const playback = video.play()
-    playback?.catch(() => setVideoFailed(true))
+    playback?.catch(() => setVideoFailed(current => ({ ...current, [theme]: true })))
     return () => video.pause()
   }, [theme, artworkInView, prefersReducedMotion, currentVideoFailed])
 
