@@ -1,4 +1,4 @@
-import { BrainCircuit, Cloud, Code2, Database, Layers3, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowDown, BrainCircuit, Cloud, Code2, Database, Layers3, ShieldCheck, Sparkles } from 'lucide-react'
 
 const nodes = [
   { label: 'INTERFACE', sub: 'React · Next.js', icon: Layers3, x: '8%', y: '16%', cls: 'node-interface' },
