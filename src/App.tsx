@@ -165,7 +165,31 @@ function Intelligence({ theme }: { theme: Theme }) {
         )}
       </motion.div>
     ) : (
-      <div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div>
+      prefersReducedMotion || videoFailed ? (
+        <div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div>
+      ) : (
+        <motion.div
+          ref={artworkRef}
+          className="intelligence-artwork intelligence-artwork-dark"
+          initial={{ opacity: 0, y: 18, scale: 0.985 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <video
+            ref={videoRef}
+            className="intelligence-artwork-video intelligence-artwork-video-dark"
+            muted
+            loop
+            playsInline
+            preload={artworkInView ? 'auto' : 'metadata'}
+            aria-label="Animated dark-theme information-to-intelligence artwork"
+            onError={() => setVideoFailed(true)}
+          >
+            <source src="/videos/information-to-intelligent-outcomes-dark.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
+      )
     )}
     <div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div><h2>From information to <em>intelligence.</em></h2><p>We connect your data, systems, and workflows to intelligent experiences that solve real business problems.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & knowledge systems</span><span>AI agents & automation</span><span>Intelligent data pipelines</span></div><a className="text-link" href="#contact">Explore AI capabilities <ArrowUpRight size={16} /></a></div>
   </div></section>
