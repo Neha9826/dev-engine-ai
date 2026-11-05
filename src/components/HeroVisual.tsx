@@ -1,60 +1,59 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Theme = 'light' | 'dark'
-
 type HeroVisualProps = { theme: Theme }
 
-const sources: Record<Theme, string> = {
+const videoSources: Record<Theme, string> = {
   light: '/videos/Dev-Engine-AI-Hero-bg-video.mp4',
   dark: '/videos/Dev-Engine-AI-Hero-bg-dark-video.mp4',
 }
 
-const posters: Record<Theme, string> = {
-  light: '/videos/Dev-Engine-AI-Hero-bg-video-poster.jpg',
-  dark: '/videos/Dev-Engine-AI-Hero-bg-dark-video-poster.jpg',
-}
-
 export default function HeroVisual({ theme }: HeroVisualProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [failed, setFailed] = useState(false)
-  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [reducedMotion, setReducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+  const [videoReady, setVideoReady] = useState(false)
+  const [videoFailed, setVideoFailed] = useState(false)
 
   useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const update = () => setReducedMotion(query.matches)
-    query.addEventListener('change', update)
-    return () => query.removeEventListener('change', update)
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updatePreference = () => setReducedMotion(preference.matches)
+    preference.addEventListener('change', updatePreference)
+    return () => preference.removeEventListener('change', updatePreference)
   }, [])
 
+  // The theme-keyed video below mounts only the active source. The CSS fallback
+  // remains visible until that source can play, so switching themes never exposes
+  // an empty frame or downloads both full videos at once.
   useEffect(() => {
-    setFailed(false)
-    const video = videoRef.current
-    if (!video || reducedMotion) return
-    video.pause()
-    video.load()
-    const play = () => { void video.play().catch(() => setFailed(true)) }
-    if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) play()
-    else video.addEventListener('canplay', play, { once: true })
-    return () => video.removeEventListener('canplay', play)
-  }, [theme, reducedMotion])
+    setVideoReady(false)
+    setVideoFailed(false)
+  }, [theme])
 
-  return <div className="entity-stage hero-video-stage" role="img" aria-label="Dev Engine AI animated hero artwork">
-    <div className="hero-video-fallback" style={{ backgroundImage: `url("${posters[theme]}")` }} aria-hidden="true" />
-    {!reducedMotion && !failed && <video
-      ref={videoRef}
-      key={theme}
-      className="hero-background-video"
-      src={sources[theme]}
-      poster={posters[theme]}
-      autoPlay
-      muted
-      playsInline
-      loop
-      preload="metadata"
-      aria-hidden="true"
-      disablePictureInPicture
-      controls={false}
-      onError={() => setFailed(true)}
-    />}
-  </div>
+  return (
+    <div
+      className={`entity-stage hero-video-stage theme-${theme}`}
+      role="img"
+      aria-label="Dev Engine AI animated hero artwork"
+    >
+      <div className="hero-video-fallback" aria-hidden="true" />
+      {!reducedMotion && !videoFailed && (
+        <video
+          key={theme}
+          className={`hero-background-video${videoReady ? ' is-ready' : ''}`}
+          src={videoSources[theme]}
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="metadata"
+          aria-hidden="true"
+          disablePictureInPicture
+          controls={false}
+          onCanPlay={() => setVideoReady(true)}
+          onError={() => setVideoFailed(true)}
+        />
+      )}
+    </div>
+  )
 }
