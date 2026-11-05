@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Plus, Send, Sparkles } from 'lucide-react'
@@ -20,7 +20,18 @@ const lifecycle = [
   { n: '09', title: 'Evolution', short: 'Keep making it better.', desc: 'We use real-world feedback and product signals to improve the experience, strengthen the platform, and plan what comes next.', work: ['Product analytics & feedback', 'Iteration and enhancements', 'Scaling and cost review', 'Continuous improvement'], output: 'A living product that keeps creating value.', tools: 'Analytics · Experimentation · Performance' },
 ]
 
-function Hero() {
+type Theme = 'light' | 'dark'
+
+function initialTheme(): Theme {
+  if (typeof window === 'undefined') return 'light'
+  const current = document.documentElement.dataset.theme
+  if (current === 'light' || current === 'dark') return current
+  const saved = window.localStorage.getItem('dev-engine-theme')
+  if (saved === 'light' || saved === 'dark') return saved
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+function Hero({ theme }: { theme: Theme }) {
   return <section className="hero" id="top">
     <div className="hero-atmosphere" aria-hidden="true"><span className="haze haze-a" /><span className="haze haze-b" /><span className="glass-ribbon ribbon-a" /><span className="glass-ribbon ribbon-b" /></div>
     <div className="container hero-layout">
@@ -31,7 +42,7 @@ function Hero() {
         <div className="hero-actions"><a className="button button-primary" href="#contact">Start a conversation <ArrowUpRight size={17} /></a><a className="button button-glass" href="#work">Explore our work <ArrowDown size={15} /></a></div>
         <div className="hero-proof"><span><i /> Product engineering</span><span><i /> Practical AI</span><span><i /> Production systems</span></div>
       </motion.div>
-      <motion.div className="hero-art" initial={{ opacity: 0, scale: .96, x: 24 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 1, delay: .12 }}><HeroVisual /></motion.div>
+      <motion.div className="hero-art" initial={{ opacity: 0, scale: .96, x: 24 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 1, delay: .12 }}><HeroVisual theme={theme} /></motion.div>
     </div>
     <div className="container hero-foot"><span>IDEAS, ENGINEERED INTO WHAT'S NEXT.</span><a href="#studio">SCROLL TO EXPLORE <ArrowDown size={13} /></a></div>
   </section>
@@ -103,5 +114,11 @@ function Contact() {
 }
 
 export default function App() {
-  return <><Navbar /><main><Hero /><Services /><Studio /><Lifecycle /><Intelligence /><SelectedWork /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>INDEPENDENT BY DESIGN. ENGINEERED TO DELIVER.</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
+  const [theme, setTheme] = useState<Theme>(initialTheme)
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0c0812' : '#fdfcfd')
+    window.localStorage.setItem('dev-engine-theme', theme)
+  }, [theme])
+  return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Services /><Studio /><Lifecycle /><Intelligence /><SelectedWork /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>INDEPENDENT BY DESIGN. ENGINEERED TO DELIVER.</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
 }
