@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { FormEvent } from 'react'
+import type { FormEvent, ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Plus, Send, Sparkles } from 'lucide-react'
 import Navbar from './components/Navbar'
@@ -62,7 +62,7 @@ function Studio() {
   </div></section>
 }
 
-function FlowToken({ children }: { children: React.ReactNode }) {
+function FlowToken({ children }: { children: ReactNode }) {
   return <span className="lifecycle-token">{children}</span>
 }
 
@@ -120,7 +120,7 @@ function Lifecycle() {
             <div className="quality-map"><div className="quality-gate"><span>01</span><b>UNIT</b><i>✓</i></div><div className="quality-gate"><span>02</span><b>INTEGRATION</b><i>✓</i></div><div className="quality-gate"><span>03</span><b>E2E</b><i>✓</i></div><div className="quality-gate"><span>04</span><b>SECURITY + PERF</b><i>✓</i></div></div>
             <StageFooter items={lifecycleStages[5].items} />
           </motion.article>
-          <motion.article className="life-stage life-deploy" initial={{opacity:0,y:14}} whileInView={{once:true,amount:.12}} animate={{opacity:1,y:0}} transition={{duration:.45,delay:.24}}>
+          <motion.article className="life-stage life-deploy" initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.12}} transition={{duration:.45,delay:.24}}>
             <StageHeading stage={lifecycleStages[6]} />
             <div className="deploy-map"><MiniFlow items={['Commit','Build','Test','Container','Cloud']} /><div className="deploy-cloud"><span>LIVE PRODUCTION</span><b>◉</b><small>Logs · Metrics · Traces</small></div></div>
             <StageFooter items={lifecycleStages[6].items} />
