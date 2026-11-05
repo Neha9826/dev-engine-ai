@@ -8,7 +8,7 @@ const videoSources: Record<Theme, string> = {
   dark: '/videos/Dev-Engine-AI-Hero-bg-dark-video.mp4',
 }
 
-export default function HeroVisual({ theme }: HeroVisualProps) {
+const posterSources: Record<Theme, string> = {\n  light: '/videos/Dev-Engine-AI-Hero-bg-video-poster.jpg',\n  dark: '/videos/Dev-Engine-AI-Hero-bg-dark-video-poster.jpg',\n}\n\nexport default function HeroVisual({ theme }: HeroVisualProps) {
   const [reducedMotion, setReducedMotion] = useState(
     () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
@@ -36,7 +36,7 @@ export default function HeroVisual({ theme }: HeroVisualProps) {
       role="img"
       aria-label="Dev Engine AI animated hero artwork"
     >
-      <div className="hero-video-fallback" aria-hidden="true" />
+      <div className="hero-video-fallback" style={{ backgroundImage: `url("${posterSources[theme]}")` }} aria-hidden="true" />
       {!reducedMotion && !videoFailed && (
         <video
           key={theme}
