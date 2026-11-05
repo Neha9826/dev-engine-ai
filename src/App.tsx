@@ -123,14 +123,23 @@ function Intelligence({ theme }: { theme: Theme }) {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-    if (prefersReducedMotion || !artworkInView || currentVideoFailed) {
+    if (prefersReducedMotion || currentVideoFailed) {
       video.pause()
       return
     }
+
+    // The artwork node is replaced when the theme changes. Load and start the
+    // newly mounted source directly instead of waiting for a stale in-view observer.
+    video.muted = true
+    video.loop = true
+    video.playsInline = true
+    video.load()
     const playback = video.play()
-    playback?.catch(() => setVideoFailed(current => ({ ...current, [theme]: true })))
+    playback?.catch(() => {
+      // A transient autoplay rejection is not a media failure. onCanPlay retries.
+    })
     return () => video.pause()
-  }, [theme, artworkInView, prefersReducedMotion, currentVideoFailed])
+  }, [theme, prefersReducedMotion, currentVideoFailed])
 
   return <section className={theme === 'light' ? 'section intelligence-section intelligence-section-light' : 'section intelligence-section'}><div className="container intelligence-layout">
     {theme === 'light' ? (
@@ -154,12 +163,15 @@ function Intelligence({ theme }: { theme: Theme }) {
             ref={videoRef}
             className="intelligence-artwork-video"
             key="light-intelligence-video"
+            autoPlay
+            autoPlay
             muted
             loop
             playsInline
             preload={artworkInView ? 'auto' : 'metadata'}
             poster="/images/Information-to-Intelligent-Outcomes.png"
             aria-label="Animated information-to-intelligence artwork"
+            onCanPlay={() => { if (!prefersReducedMotion) videoRef.current?.play().catch(() => {}) }}
             onError={() => setVideoFailed(current => ({ ...current, [theme]: true }))}
           >
             <source src="/videos/information-to-intelligent-outcomes.mp4" type="video/mp4" />
