@@ -48,14 +48,14 @@ function Hero({ theme }: { theme: Theme }) {
 
 function Services() {
   return <section className="section services-section" id="services"><div className="container">
-    <div className="section-intro-row"><SectionHeading eyebrow="WHAT WE DO / 01" title={<>Engineering for<br /><em>what's next.</em></>} text="A connected set of capabilities to take your product from a first spark to a platform people can rely on." /><div className="intro-aside">ONE PARTNER<br /><strong>FROM CONCEPT<br />TO CONTINUOUS GROWTH</strong></div></div>
+    <div className="section-intro-row"><SectionHeading eyebrow="WHAT WE DO / 04" title={<>Engineering for<br /><em>what's next.</em></>} text="A connected set of capabilities to take your product from a first spark to a platform people can rely on." /><div className="intro-aside">ONE PARTNER<br /><strong>FROM CONCEPT<br />TO CONTINUOUS GROWTH</strong></div></div>
     <div className="service-grid">{services.map((s, i) => { const Icon = s.icon; return <motion.article className="service-card" key={s.number} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ delay: i * .07 }}><div className="service-head"><span>{s.number} / CAPABILITY</span><Icon size={22} strokeWidth={1.5} /></div><div className="service-body"><small>{s.tag}</small><h3>{s.title}</h3><p>{s.description}</p></div><ul>{s.items.map(item => <li key={item}><span />{item}</li>)}</ul><a href="#contact" aria-label={'Discuss ' + s.title}><ArrowUpRight size={18} /></a></motion.article> })}</div>
   </div></section>
 }
 
 function Studio() {
   return <section className="section studio-section" id="studio"><div className="container studio-layout">
-    <div className="studio-copy"><div className="eyebrow"><span className="eyebrow-line" /> THE DEV ENGINE APPROACH / 02</div><h2>Good technology starts with <em>better questions.</em></h2><p>We don't build for the sake of building. We understand the outcome first, choose technology with intent, and make considered decisions that hold up beyond launch.</p><a className="text-link" href="#lifecycle">See how we work <ArrowUpRight size={16} /></a></div>
+    <div className="studio-copy"><div className="eyebrow"><span className="eyebrow-line" /> THE DEV ENGINE APPROACH / 05</div><h2>Good technology starts with <em>better questions.</em></h2><p>We don't build for the sake of building. We understand the outcome first, choose technology with intent, and make considered decisions that hold up beyond launch.</p><a className="text-link" href="#lifecycle">See how we work <ArrowUpRight size={16} /></a></div>
     <div className="principles-grid">{principles.map(({ icon: Icon, title, text }, i) => <article className="principle" key={title}><span className="principle-number">0{i + 1}</span><div className="principle-icon"><Icon size={20} strokeWidth={1.6} /></div><h3>{title}</h3><p>{text}</p></article>)}</div>
   </div></section>
 }
@@ -64,7 +64,7 @@ function Lifecycle() {
   return <section className="section lifecycle-section" id="lifecycle">
     <div className="container">
       <div className="lifecycle-heading">
-        <SectionHeading eyebrow="THE SOFTWARE LIFECYCLE / 03" title={<>From first thought<br />to <em>what's next.</em></>} text="One partner to turn an early idea into a product people can use, trust and grow with." />
+        <SectionHeading eyebrow="THE SOFTWARE LIFECYCLE / 01" title={<>From first thought<br />to <em>what's next.</em></>} text="One partner to turn an early idea into a product people can use, trust and grow with." />
         <div className="lifecycle-stamp"><Sparkles size={18} /><span>IDEA TO PRODUCT<br />AND BEYOND</span></div>
       </div>
       <div className="journey" aria-label="Five stages: idea, plan, build, launch and grow">
@@ -206,12 +206,12 @@ function Intelligence({ theme }: { theme: Theme }) {
         </motion.div>
       )
     )}
-    <div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 04</div><h2>From information to <em>intelligence.</em></h2><p>We connect your data, systems, and workflows to intelligent experiences that solve real business problems.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & knowledge systems</span><span>AI agents & automation</span><span>Intelligent data pipelines</span></div><a className="text-link" href="#contact">Explore AI capabilities <ArrowUpRight size={16} /></a></div>
+    <div className="intelligence-copy"><div className="eyebrow"><span className="eyebrow-line" /> PRACTICAL AI / 02</div><h2>From information to <em>intelligence.</em></h2><p>We connect your data, systems, and workflows to intelligent experiences that solve real business problems.</p><div className="ai-capabilities"><span>LLM-powered experiences</span><span>RAG & knowledge systems</span><span>AI agents & automation</span><span>Intelligent data pipelines</span></div><a className="text-link" href="#contact">Explore AI capabilities <ArrowUpRight size={16} /></a></div>
   </div></section>
 }
 
 function SelectedWork() {
-  return <section className="section work-section" id="work"><div className="container"><div className="work-heading"><SectionHeading eyebrow="SELECTED WORK / 05" title={<>Built with intent.<br /><em>Made for the real world.</em></>} text="A glimpse into the products and platforms we engineer. Some work is shared at a high level to respect confidentiality." /><span className="work-index">CAPABILITIES<br />OVER CLAIMS</span></div>
+  return <section className="section work-section" id="work"><div className="container"><div className="work-heading"><SectionHeading eyebrow="SELECTED WORK / 03" title={<>Built with intent.<br /><em>Made for the real world.</em></>} text="A glimpse into the products and platforms we engineer. Some work is shared at a high level to respect confidentiality." /><span className="work-index">CAPABILITIES<br />OVER CLAIMS</span></div>
     <div className="projects-list">{projects.map((p, i) => <article className="project-row" key={p.id}><div className="project-number">{p.id}<span>{p.category}</span></div><div className="project-info"><h3>{p.title}</h3><p>{p.description}</p><div className="tech-list">{p.stack.map(t => <span key={t}>{t}</span>)}</div></div><div className={'project-art project-art-' + p.kind}><div className="project-art-glow" /><div className="project-window"><div className="window-bar"><i /><i /><i /><span>{p.kind === 'platform' ? 'architecture / overview' : p.kind === 'studio' ? 'document / workspace' : 'workspace / knowledge-base'}</span></div><div className="window-content"><div className="window-side"><i /><i /><i /><i /></div><div className="window-main"><small>{p.category}</small><strong>{i === 0 ? 'Knowledge that\nmoves forward.' : i === 1 ? 'Make space for\nbetter work.' : 'Systems that\nwork together.'}</strong><span /><span /><span className="short" /><div className="window-chip"><Sparkles size={12} /> {i === 0 ? 'AI SUMMARY' : i === 1 ? 'SMART WORKFLOW' : 'LIVE SYSTEM MAP'}</div></div></div></div><span className="project-art-label">DEV ENGINE AI / PRODUCT STUDY 0{ i + 1 }</span></div></article>)}</div>
   </div></section>
 }
@@ -247,5 +247,5 @@ export default function App() {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0c0812' : '#fdfcfd')
     window.localStorage.setItem('dev-engine-theme', theme)
   }, [theme])
-  return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Services /><Studio /><Lifecycle /><Intelligence theme={theme} /><SelectedWork /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>INDEPENDENT BY DESIGN. ENGINEERED TO DELIVER.</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
+  return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Lifecycle /><Intelligence theme={theme} /><SelectedWork /><Services /><Studio /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>INDEPENDENT BY DESIGN. ENGINEERED TO DELIVER.</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
 }
