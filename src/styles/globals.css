@@ -176,30 +176,29 @@
 @media(prefers-reduced-motion:reduce){.hero-background-video{display:none}.hero-video-fallback{background:radial-gradient(ellipse at 50% 48%,#c084ff35,transparent 68%),var(--bg-soft)}}
 
 
-/* Hero-to-services blend: let the next section fade upward over the hero edge. */
-.hero-video-stage:after{content:none}
-.services-section{position:relative;isolation:isolate;padding-top:42px}
-.services-section:before{
+/* Hero-to-Lifecycle transition: resolve into the next section's exact theme surface. */
+.hero{
+  isolation:isolate;
+}
+.hero:after{
   content:"";
   position:absolute;
   left:0;
   right:0;
-  top:-320px;
-  height:320px;
-  z-index:2;
+  bottom:0;
+  height:clamp(220px,24vw,320px);
+  z-index:1;
   pointer-events:none;
-  background:linear-gradient(to bottom,
-    color-mix(in srgb,var(--bg) 0%,transparent) 0%,
+  opacity:1;
+  background:linear-gradient(
+    to bottom,
+    transparent 0%,
     color-mix(in srgb,var(--bg) 7%,transparent) 22%,
-    color-mix(in srgb,var(--bg) 28%,transparent) 45%,
-    color-mix(in srgb,var(--bg) 72%,transparent) 76%,
-    var(--bg) 100%);
-}
-.services-section>.container{position:relative;z-index:3}
-.hero:after{opacity:0}
-.hero:after{
-  height:1px;
-  opacity:.08;
+    color-mix(in srgb,var(--bg) 24%,transparent) 43%,
+    color-mix(in srgb,var(--bg) 58%,transparent) 68%,
+    color-mix(in srgb,var(--bg) 86%,transparent) 86%,
+    var(--bg) 100%
+  );
 }
 body{font-size:16px}
 p{font-size:16px}
@@ -221,9 +220,6 @@ p{font-size:16px}
   .hero-description{font-size:15px}
   .section-heading p,.studio-copy>p,.intelligence-copy>p{font-size:15px}
   .hero-foot{font-size:8px}
-  .hero-video-stage:after{content:none}
-  .services-section{padding-top:34px}
-  .services-section:before{top:-220px;height:220px}
 }
 
 
