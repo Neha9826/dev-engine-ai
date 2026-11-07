@@ -34,10 +34,10 @@ function Hero({ theme }: { theme: Theme }) {
     <div className="hero-atmosphere" aria-hidden="true"><span className="haze haze-a" /><span className="haze haze-b" /><span className="glass-ribbon ribbon-a" /><span className="glass-ribbon ribbon-b" /></div>
     <div className="container hero-layout">
       <motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .75 }}>
-        <div className="eyebrow"><span className="eyebrow-line" /> INDEPENDENT AI ENGINEERING STUDIO</div>
+        <div className="eyebrow"><span className="eyebrow-line" /> SOFTWARE & AI ENGINEERING</div>
         <h1>We turn ambitious ideas into <em>intelligent reality.</em></h1>
         <p className="hero-description">From the first product decision to production-ready software, we bring product thinking, deep engineering and practical AI together.</p>
-        <div className="hero-actions"><a className="button button-primary" href="#contact">Start a conversation <ArrowUpRight size={17} /></a><a className="button button-glass" href="#work">Explore our work <ArrowDown size={15} /></a></div>
+        <div className="hero-actions"><a className="button button-primary" href="#contact">Discuss a project <ArrowUpRight size={17} /></a><a className="button button-glass" href="#work">Explore our work <ArrowDown size={15} /></a></div>
         <div className="hero-proof"><span><i /> Product engineering</span><span><i /> Practical AI</span><span><i /> Production systems</span></div>
       </motion.div>
       
@@ -247,5 +247,5 @@ export default function App() {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0c0812' : '#fdfcfd')
     window.localStorage.setItem('dev-engine-theme', theme)
   }, [theme])
-  return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Lifecycle /><Intelligence theme={theme} /><SelectedWork /><Services /><Studio /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>INDEPENDENT BY DESIGN. ENGINEERED TO DELIVER.</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
+  return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Lifecycle /><Intelligence theme={theme} /><SelectedWork /><Services /><Studio /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>SOFTWARE · SAAS · PRACTICAL AI</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
 }
