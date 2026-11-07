@@ -858,7 +858,8 @@ p{font-size:16px}
   .nav-links { display: none; position: absolute; top: 83px; left: 0; right: 0; margin: 0; padding: 13px 26px 22px; transform: none; background: var(--surface-strong); border-bottom: 1px solid var(--line); backdrop-filter: blur(24px); flex-direction: column; align-items: stretch; gap: 0; }
   .nav-links-open { display: flex; }
   .nav-links > a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
-  .nav-links .nav-mobile-whatsapp, .nav-links .nav-mobile-cta { display: flex; align-items: center; justify-content: space-between; }
+  .nav-links .nav-mobile-whatsapp { display: grid !important; place-items: center; }
+  .nav-links .nav-mobile-cta { display: flex; align-items: center; justify-content: space-between; }
   .nav-links .nav-mobile-whatsapp { color: var(--accent-strong); }
   .nav-links .nav-mobile-cta { color: var(--accent); border: 0; }
   .nav-actions .nav-whatsapp, .nav-actions .nav-cta { display: none; }
@@ -899,6 +900,7 @@ p{font-size:16px}
   transform: translateY(-1px);
 }
 .nav-links .nav-mobile-whatsapp {
+  display: none;
   width: 42px;
   height: 42px;
   padding: 0 !important;
@@ -934,4 +936,15 @@ p{font-size:16px}
   #lifecycle, #intelligence, #work, #services, #studio, #faq, #contact {
     scroll-margin-top: 82px;
   }
+}
+
+
+/* Match the contact-card WhatsApp mark to the violet navbar identity. */
+.direct-contact-whatsapp {
+  color: #a259ff;
+}
+.direct-contact-whatsapp svg {
+  width: 19px;
+  height: 19px;
+  display: block;
 }
