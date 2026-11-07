@@ -26,7 +26,9 @@ export const faqs = [
   { q: 'What types of projects does Dev Engine AI work on?', a: 'We work on custom web applications, SaaS products, AI-enabled experiences, backend platforms, APIs, integrations, and improvements to existing software.' },
   { q: 'Can you work with our existing application or engineering team?', a: 'Yes. We can work within an existing codebase, collaborate with your team, take ownership of a defined workstream, or provide focused engineering capacity.' },
   { q: 'Can you integrate AI into an existing product?', a: 'Yes. We can help identify a useful AI use case and implement capabilities such as LLM-powered features, document intelligence, and retrieval-based experiences.' },
-  { q: 'How do you estimate project costs and timelines?', a: 'We start by understanding the outcome, scope, constraints, and dependencies. From there, we propose a practical delivery approach with a clear estimate before work begins.' },
+  { q: 'Do you work with international clients?', a: 'Yes. We work with businesses in India and internationally, using remote collaboration and clear communication throughout the engagement.' },
+  { q: 'How does an engagement work?', a: 'We start with a discovery conversation, agree on scope and milestones, then deliver in clear increments with regular reviews and visible progress.' },
+  { q: 'How do you estimate project costs and timelines?', a: 'We first understand the outcome, scope, constraints, and dependencies. Then we propose a practical delivery approach with a clear estimate before work begins.' },
   { q: 'Can we engage you for ongoing engineering support?', a: 'Yes. Ongoing engagements can cover product development, platform improvements, integrations, maintenance, and evolving technical priorities.' },
   { q: 'How do we get started?', a: 'Share a short overview of what you want to build or improve. We will review the context and discuss a sensible next step.' },
 ]
