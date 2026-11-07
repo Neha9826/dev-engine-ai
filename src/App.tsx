@@ -275,7 +275,7 @@ export default function App() {
   const [theme, setTheme] = useState<Theme>(initialTheme)
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0c0812' : '#fdfcfd')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0B0D1D' : '#F5F6FF')
     window.localStorage.setItem('dev-engine-theme', theme)
   }, [theme])
   return <><Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'light' ? 'dark' : 'light')} /><main><Hero theme={theme} /><Lifecycle /><Intelligence theme={theme} /><SelectedWork /><Services /><Studio /><Process /><FAQ /><Contact /></main><footer className="site-footer"><div className="container footer-main"><div><Brand footer /><p>Thoughtful engineering for ambitious ideas. Software, platforms and practical AI built for the real world.</p></div><div className="footer-nav"><a href="#services">Services</a><a href="#lifecycle">Our approach</a><a href="#work">Selected work</a><a href="#contact">Start a project <ArrowUpRight size={14} /></a><a href="mailto:ai.devengine@gmail.com?subject=Project%20Enquiry%20-%20Dev%20Engine%20AI">Email</a><a href="https://wa.me/919259073818?text=Hello%20Dev%20Engine%20AI%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.linkedin.com/company/dev-engine-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="tel:+919259073818">Call</a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} DEV ENGINE AI</span><span>SOFTWARE · SAAS · PRACTICAL AI</span><a href="#top">BACK TO TOP ↑</a></div></footer></>
