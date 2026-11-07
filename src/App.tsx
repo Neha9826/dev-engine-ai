@@ -10,11 +10,11 @@ import SectionHeading from './components/SectionHeading'
 import { faqs, principles, projects, services } from './data/content'
 
 const lifecycleStages = [
-  { n: '01', title: 'IDEA', summary: 'Understand what needs to be built.', labels: ['Strategy', 'Research', 'Roadmap'] },
-  { n: '02', title: 'PLAN', summary: 'Design the foundation before building.', labels: ['Architecture', 'Experience', 'Infrastructure'] },
-  { n: '03', title: 'BUILD', summary: 'Turn the blueprint into a real product.', labels: ['Full-stack', 'APIs', 'AI & RAG', 'Integrations'] },
-  { n: '04', title: 'LAUNCH', summary: 'Make the product production-ready.', labels: ['Testing', 'Security', 'Cloud', 'Deployment'] },
-  { n: '05', title: 'GROW', summary: 'Keep improving as the business evolves.', labels: ['Monitoring', 'Optimization', 'Scaling', 'Evolution'] },
+  { n: '01', title: 'IDEA', summary: 'Understand what needs to be built.', labels: ['Discovery', 'Strategy', 'Research'] },
+  { n: '02', title: 'PLAN', summary: 'Design the foundation before building.', labels: ['Architecture', 'Design', 'Infrastructure'] },
+  { n: '03', title: 'BUILD', summary: 'Turn the blueprint into a real product.', labels: ['Development', 'AI Integration', 'APIs', 'Integrations'] },
+  { n: '04', title: 'LAUNCH', summary: 'Make the product production-ready.', labels: ['Quality & Security', 'Testing', 'Deployment', 'Cloud'] },
+  { n: '05', title: 'GROW', summary: 'Keep improving as the business evolves.', labels: ['Continuous Evolution', 'Monitoring', 'Optimization', 'Scaling'] },
 ]
 
 type Theme = 'light' | 'dark'
