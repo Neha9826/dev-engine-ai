@@ -179,7 +179,7 @@ function Intelligence({ theme }: { theme: Theme }) {
       </motion.div>
     ) : (
       prefersReducedMotion || currentVideoFailed ? (
-        <div className="intelligence-visual"><div className="intelligence-glow" /><div className="intelligence-core"><div className="core-inner"><Sparkles size={30} /><span>AI</span></div></div><span className="int-label label-a">RETRIEVAL</span><span className="int-label label-b">REASONING</span><span className="int-label label-c">AUTOMATION</span><span className="int-label label-d">CONTEXT</span><div className="intelligence-note">INTELLIGENCE, APPLIED WITH PURPOSE</div></div>
+        <div className="intelligence-artwork intelligence-artwork-dark"><img src="/videos/information-to-intelligent-outcomes-dark.png" alt="From information to intelligent outcomes, in the dark theme" loading="lazy" decoding="async" /></div>
       ) : (
         <motion.div
           ref={artworkRef}
@@ -198,6 +198,7 @@ function Intelligence({ theme }: { theme: Theme }) {
             loop
             playsInline
             preload={artworkInView ? 'auto' : 'metadata'}
+            poster="/videos/information-to-intelligent-outcomes-dark.png"
             aria-label="Animated dark-theme information-to-intelligence artwork"
             onError={() => setVideoFailed(current => ({ ...current, [theme]: true }))}
           >
