@@ -750,3 +750,38 @@ p{font-size:16px}
     height:clamp(120px,32vw,180px);
   }
 }
+
+
+/* Theme-specific official horizontal brand assets */
+.brand-logo-light,
+.brand-logo-dark {
+  display: block;
+  width: clamp(180px, 18vw, 220px);
+  height: auto;
+  max-height: 74px;
+  object-fit: contain;
+  object-position: left center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.brand-logo-dark { display: none; }
+:root[data-theme="dark"] .brand-logo-light { display: none; }
+:root[data-theme="dark"] .brand-logo-dark { display: block; }
+.brand-footer .brand-logo-light,
+.brand-footer .brand-logo-dark {
+  width: 230px;
+  max-height: 77px;
+}
+@media (max-width: 760px) {
+  .brand-logo-light,
+  .brand-logo-dark {
+    width: clamp(155px, 48vw, 190px);
+    max-height: 64px;
+  }
+  .brand-footer .brand-logo-light,
+  .brand-footer .brand-logo-dark {
+    width: min(205px, 58vw);
+    max-height: 68px;
+  }
+}
