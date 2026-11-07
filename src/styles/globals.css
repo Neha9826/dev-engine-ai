@@ -872,3 +872,66 @@ p{font-size:16px}
   .direct-contact { grid-template-columns: 1fr; }
   .direct-contact-card { padding: 13px; }
 }
+
+
+/* Icon-only WhatsApp brand mark in the navbar */
+.nav-actions .nav-whatsapp {
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+  color: #a259ff;
+  border-color: color-mix(in srgb, #a259ff 42%, var(--line));
+  box-shadow: 0 0 0 rgba(162,89,255,0);
+  transition: color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.nav-actions .nav-whatsapp svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.nav-actions .nav-whatsapp:hover {
+  color: #c084ff;
+  border-color: #a259ff;
+  box-shadow: 0 0 18px #a259ff35;
+  transform: translateY(-1px);
+}
+.nav-links .nav-mobile-whatsapp {
+  width: 42px;
+  height: 42px;
+  padding: 0 !important;
+  margin: 12px 0;
+  display: grid !important;
+  place-items: center;
+  align-self: flex-start;
+  color: #a259ff;
+  border: 1px solid color-mix(in srgb, #a259ff 42%, var(--line)) !important;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.nav-links .nav-mobile-whatsapp svg {
+  width: 20px;
+  height: 20px;
+}
+.nav-links .nav-mobile-whatsapp:hover,
+.nav-links .nav-mobile-whatsapp:focus-visible {
+  color: #c084ff;
+  border-color: #a259ff !important;
+  box-shadow: 0 0 16px #a259ff30;
+}
+.nav-actions .nav-whatsapp:focus-visible,
+.nav-links .nav-mobile-whatsapp:focus-visible {
+  outline: 2px solid #a259ff;
+  outline-offset: 4px;
+}
+/* Keep anchor destinations visible below the sticky header. */
+#lifecycle, #intelligence, #work, #services, #studio, #faq, #contact {
+  scroll-margin-top: 100px;
+}
+@media (max-width: 760px) {
+  #lifecycle, #intelligence, #work, #services, #studio, #faq, #contact {
+    scroll-margin-top: 82px;
+  }
+}

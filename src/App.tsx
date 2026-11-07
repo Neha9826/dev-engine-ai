@@ -42,7 +42,7 @@ function Hero({ theme }: { theme: Theme }) {
       </motion.div>
       
     </div>
-    <div className="container hero-foot"><span>IDEAS, ENGINEERED INTO WHAT'S NEXT.</span><a href="#studio">SCROLL TO EXPLORE <ArrowDown size={13} /></a></div>
+    <div className="container hero-foot"><span>IDEAS, ENGINEERED INTO WHAT'S NEXT.</span><a href="#lifecycle">SCROLL TO EXPLORE <ArrowDown size={13} /></a></div>
   </section>
 }
 
