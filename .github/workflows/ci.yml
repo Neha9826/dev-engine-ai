@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'review/**'
+      - 'fix/**'
   workflow_dispatch:
   pull_request:
     branches:
