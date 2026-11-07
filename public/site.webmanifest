@@ -1,0 +1,15 @@
+{
+  "name": "Dev Engine AI",
+  "short_name": "Dev Engine AI",
+  "display": "standalone",
+  "background_color": "#0c0812",
+  "theme_color": "#fdfcfd",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
