@@ -1,22 +1,26 @@
 # Dev Engine AI — Website
 
-A responsive, single-page marketing website for Dev Engine AI, a founder-led software engineering and AI consultancy.
+The public website for Dev Engine AI, a founder-led software engineering and AI studio.
 
-## Requirements
+## Stack
 
-- Node.js 20.19+ or 22.12+
-- npm 10+
+- React 19, TypeScript and Vite
+- Framer Motion for interface motion
+- Tailwind CSS utilities with custom CSS for the visual system
+- Web3Forms for contact-form delivery
 
 ## Run locally
 
+Requirements: Node.js 20.19+ or 22.12+, and npm 10+.
+
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Vite prints a local URL (normally `http://localhost:5173`).
+Vite prints the local development URL (normally `http://localhost:5173`).
 
-## Production build
+## Validate a production build
 
 ```bash
 npm run typecheck
@@ -24,50 +28,38 @@ npm run build
 npm run preview
 ```
 
-The production-ready static site is generated in `dist/`.
+The production site is generated in `dist/`.
 
-## Contact form setup
+## Contact form configuration
 
-The form UI, browser-side validation, loading state, success state, error state, and an explicit unconfigured state are implemented. **It does not send enquiries until a delivery endpoint is configured.**
+The contact form sends enquiries through Web3Forms. It reads the access key from the Vite environment variable `VITE_WEB3FORMS_ACCESS_KEY`.
 
-1. Create a form at [Formspree](https://formspree.io/).
-2. Copy its endpoint URL.
-3. Create a local `.env` file in the project root (do not commit it).
-4. Add:
+1. Create or manage the form in Web3Forms and confirm the registered notification inbox is the Dev Engine AI business mailbox.
+2. Add the key to a local `.env.local` file in the repository root:
 
    ```env
-   VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
+   VITE_WEB3FORMS_ACCESS_KEY=your_web3forms_access_key
    ```
 
-5. Restart the Vite dev server and submit a test enquiry.
+3. Add the same variable in Cloudflare Pages for both Production and Preview environments, then trigger a fresh build.
+4. Submit a real test enquiry and confirm the notification arrives in the intended business inbox.
 
-The browser sends the form to the configured Formspree endpoint. Keep any private API credentials out of frontend code. The endpoint is intentionally blank in `.env.example`.
+Never commit `.env`, `.env.local`, a real access key, or any other secret. The committed `.env.example` contains a placeholder only.
 
-## Brand assets and content
+## Content and portfolio
 
-- `public/favicon.svg` is a temporary typographic mark, not a replacement for an official supplied logo. Replace it with approved brand assets when available.
-- `public/og-image.svg` is a social-sharing graphic that can be updated with final brand assets.
-- The official business email and social URLs have not been supplied, so no fabricated contact details or social links are displayed.
-- Project descriptions are deliberately high-level. Arch-OS is presented without protected product concepts or confidential implementation details.
-- Edit service and project copy in `src/data/content.ts`.
+- Edit services, project summaries, project links and technology labels in `src/data/content.ts`.
+- Project links are public destinations and open in a new tab with `noopener noreferrer`.
+- Email (`mailto:`) and phone (`tel:`) links intentionally hand off to the visitor's configured mail or calling app.
+- Portfolio interface artwork is illustrative; it is not presented as a screenshot of a live client product.
+- Do not add client names, logos, testimonials, metrics or project details without permission and verification.
 
 ## Deployment
 
-This is a static Vite SPA and can be deployed to Vercel, Netlify, Cloudflare Pages, Firebase Hosting, or any static host.
+The website is a static Vite application deployed through Cloudflare Pages.
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- Install command: `npm install`
+- Production branch: `main`
 
-For Firebase Hosting, configure the hosting `public` directory as `dist` and add an SPA rewrite from `**` to `/index.html` if your hosting setup requires it. Add the contact endpoint as an environment variable in your deployment provider and rebuild.
-
-## Notes
-
-- Responsive navigation, anchor navigation, FAQ accordion, contact validation and submission states are implemented.
-- Motion respects `prefers-reduced-motion`.
-- Google Fonts are loaded remotely; system fallbacks are defined.
-- No database or custom backend is required for this marketing site.
-
-## Validation note for this delivery
-
-The source files were checked for TypeScript/TSX syntax. A full dependency install, TypeScript project check, production build, and browser preview could not be completed in the generation environment because outbound DNS access to the npm registry was unavailable. Run the commands above in a network-enabled local environment before deploying.
+The deployed build must receive `VITE_WEB3FORMS_ACCESS_KEY` as a Cloudflare Pages environment variable. Vite embeds `VITE_*` variables into the client bundle at build time, so never place private server credentials in these variables.
