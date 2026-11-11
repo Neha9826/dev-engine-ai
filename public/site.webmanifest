@@ -2,8 +2,8 @@
   "name": "Dev Engine AI",
   "short_name": "Dev Engine AI",
   "display": "standalone",
-  "background_color": "#0c0812",
-  "theme_color": "#fdfcfd",
+  "background_color": "#0B0D1D",
+  "theme_color": "#F5F6FF",
   "icons": [
     {
       "src": "/favicon-192.png",
